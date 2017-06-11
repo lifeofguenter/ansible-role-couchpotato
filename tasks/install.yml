@@ -6,6 +6,7 @@
     dest: /opt/CouchPotatoServer
     update: no
   become: yes
+  notify: restart_couchpotato
 
 - name: fix perms
   file:
@@ -13,7 +14,7 @@
     state: directory
     recurse: yes
     owner: "{{ couchpotato_user }}"
-  become_user: yes
+  become: yes
 
 - name: check for systemd
   command: systemctl --version
