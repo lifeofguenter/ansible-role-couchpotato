@@ -1,0 +1,42 @@
+---
+
+- name: clone couchpotato
+  git:
+    repo: https://github.com/CouchPotato/CouchPotatoServer.git
+    dest: /opt/CouchPotatoServer
+    update: no
+  become: yes
+
+- name: fix perms
+  file:
+    path: /opt/CouchPotatoServer
+    state: directory
+    recurse: yes
+    owner: "{{ sonarr_user }}"
+  become_user: yes
+
+- name: check for systemd
+  command: systemctl --version
+  register: couchpotato_systemctl_version
+  ignore_errors: yes
+
+- name: add couchpotato.service
+  template:
+    src: couchpotato.service.ini
+    dest: /lib/systemd/system/couchpotato.service
+    mode: 0644
+  become: yes
+  when: couchpotato_systemctl_version.rc == 0
+  notify:
+    - couchpotato_reload_systemd
+    - restart_couchpotato
+
+- name: add couchpotato.init
+  copy:
+    src: /opt/CouchPotatoServer/init/ubuntu
+    dest: /etc/init.d/couchpotato
+    mode: "a+x"
+    remote_src: True
+  become: yes
+  when: couchpotato_systemctl_version.rc != 0
+  notify: restart_couchpotato

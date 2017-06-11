@@ -1,0 +1,12 @@
+---
+
+- name: couchpotato_reload_systemd
+  command: systemctl daemon-reload
+  become: yes
+
+- name: restart_couchpotato
+  service:
+    name: couchpotato
+    state: restarted
+    enabled: yes
+  become: yes
