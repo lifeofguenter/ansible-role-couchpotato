@@ -12,7 +12,7 @@
     path: /opt/CouchPotatoServer
     state: directory
     recurse: yes
-    owner: "{{ sonarr_user }}"
+    owner: "{{ couchpotato_user }}"
   become_user: yes
 
 - name: check for systemd
