@@ -10,7 +10,11 @@ none
 
 ## Role Variables
 
-- `couchpotato_user: couchpotato`
+```yaml
+couchpotato_user: couchpotato
+
+couchpotato_data_dir: ''
+```
 
 ## Dependencies
 

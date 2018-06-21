@@ -1,0 +1,11 @@
+---
+
+- name: add couchpotato.service
+  template:
+    src: couchpotato.service.ini
+    dest: /lib/systemd/system/couchpotato.service
+    mode: 0644
+  become: yes
+  notify:
+    - couchpotato_reload_systemd
+    - restart_couchpotato
