@@ -1,0 +1,10 @@
+---
+
+- name: add couchpotato.init
+  copy:
+    src: /opt/CouchPotatoServer/init/ubuntu
+    dest: /etc/init.d/couchpotato
+    mode: "a+x"
+    remote_src: True
+  become: yes
+  notify: restart_couchpotato

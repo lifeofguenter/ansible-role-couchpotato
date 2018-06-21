@@ -1,0 +1,12 @@
+---
+
+- name: get homedir
+  getent:
+    database: passwd
+    key: "{{ couchpotato_user }}"
+    split: ":"
+  become: yes
+
+- name: set couchpotato_data_dir
+  set_fact:
+    couchpotato_data_dir: "{{ getent_passwd[couchpotato_user][4] }}"

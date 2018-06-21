@@ -3,18 +3,20 @@
 galaxy_info:
   author: Gunter Grodotzki
   description: Installs CouchPotato
-  company: weheartwebsites UG
+  company: 9JKH (Pty) Ltd.
   license: MIT
-  min_ansible_version: 2.3
+  min_ansible_version: 2.5
   platforms:
   - name: Ubuntu
     versions:
-    - xenial
-    - trusty
+      - bionic
+      - xenial
+      - trusty
   - name: Debian
     versions:
-    - jessie
-    - wheezy
+      - stretch
+      - jessie
+      - wheezy
   galaxy_tags:
     - system
     - htpc

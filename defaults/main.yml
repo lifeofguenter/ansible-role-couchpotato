@@ -1,3 +1,5 @@
 ---
 
 couchpotato_user: couchpotato
+
+couchpotato_data_dir: ''

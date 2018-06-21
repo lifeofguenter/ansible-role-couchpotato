@@ -1,3 +1,17 @@
 ---
 
-- include: install.yml
+- name: check for systemd
+  command: systemctl --version
+  register: couchpotato_systemctl_version
+  ignore_errors: yes
+
+- import_tasks: datadir.yml
+  when: not couchpotato_data_dir
+
+- import_tasks: install.yml
+
+- import_tasks: systemd.yml
+  when: couchpotato_systemctl_version is success
+
+- import_tasks: sysvinit.yml
+  when: couchpotato_systemctl_version is failed
