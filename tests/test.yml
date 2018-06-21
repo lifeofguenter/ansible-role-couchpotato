@@ -1,6 +1,12 @@
 ---
 
 - hosts: localhost
+
   remote_user: root
-  roles:
-    - ansible-role-couchpotato
+
+  tasks:
+    - import_role:
+        name: ansible-role-couchpotato
+
+    - debug:
+        msg: "{{ couchpotato_data_dir }}"
